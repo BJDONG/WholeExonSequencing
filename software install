@@ -6,7 +6,7 @@ $ cd bwa-0.7.15
 $ make
 $ ./bwa
 # build index genome
-
+$ bwa index -p hg19 hg19.fa
 
 2 samtools
 download from https://sourceforge.net/projects/samtools/files/

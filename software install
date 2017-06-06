@@ -1,0 +1,36 @@
+1 BWA
+download from https://sourceforge.net/projects/bio-bwa/files/
+# install
+$ tar jxvf bwa-0.7.15.tar.bz2
+$ cd bwa-0.7.15
+$ make
+$ ./bwa
+# build index genome
+
+
+2 samtools
+download from https://sourceforge.net/projects/samtools/files/
+# install
+$ tar jxvf samtools-1.4.1.tar.bz2
+$ cd samtools-1.4.1
+$ ./configure
+$ make
+$ ./samtools
+
+
+3 picard
+download .jar file from http://broadinstitute.github.io/picard/
+# test installation 
+$ java -jar picard.jar -h
+
+
+4 GATK
+download file from https://software.broadinstitute.org/gatk/download/
+# simply decompress the file
+$ tar jxvf GenomeAnalysisTK-3.7-0.tar.bz2
+
+
+5 mutect1
+download file from https://software.broadinstitute.org/gatk/download/mutect
+# simply decompress the file
+$ unzip mutect-1.1.7.jar.zip

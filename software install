@@ -28,6 +28,7 @@ $ java -jar picard.jar -h
 download file from https://software.broadinstitute.org/gatk/download/
 # simply decompress the file
 $ tar jxvf GenomeAnalysisTK-3.7-0.tar.bz2
+gatk resource database https://software.broadinstitute.org/gatk/download/bundle
 
 
 5 mutect1

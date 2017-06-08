@@ -14,6 +14,7 @@ $ java -jar picard.jar CreateSequenceDictionary R=hg19.fa O=hg19.dict
 5 download reference used in GATK process
 https://software.broadinstitute.org/gatk/download/bundle
 
-6 download target bed file from Agilent
+6 create interval list file
+download target bed file from Agilent
 need to register
 

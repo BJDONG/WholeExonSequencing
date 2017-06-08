@@ -5,4 +5,15 @@ then merge them together in a single file. Please note that the order of the chr
 2 build bwa index
 bwa index -p hg19 hg19.fa
 
-3 build fai
+3 build hg19 fasta file index
+$ samtools faidx hg19.fa
+
+4 create the hg19 dictionary file
+$ java -jar picard.jar CreateSequenceDictionary R=hg19.fa O=hg19.dict
+
+5 download reference used in GATK process
+https://software.broadinstitute.org/gatk/download/bundle
+
+6 download target bed file from Agilent
+need to register
+

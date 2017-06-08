@@ -1,0 +1,8 @@
+1 reference genome hg19:
+download from UCSC by chromosome from http://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/
+then merge them together in a single file. Please note that the order of the chromosome SHOLD BE chr1-chr22, chrX, chrY
+
+2 build bwa index
+bwa index -p hg19 hg19.fa
+
+3 build fai

@@ -35,14 +35,16 @@ java -jar ${PICARD} MarkDuplicates VALIDATION_STRINGENCY=SILENT INPUT=${workdir}
 
 ${SAMTOOLS} index ${workdir}/04-picard/${sample}.marked.bam
 
-java -jar ${GATK} -nt 16 -T RealignerTargetCreator -U ALLOW_N_CIGAR_READS -R ${hg19}/hg19.fa -I ${workdir}/04-picard/${sample}.marked.bam -o ${workdir}/05-GATK/${sample}.marked.intervals -known ${known1000G_indels} -known ${GoldStandard_indels}
+java -jar ${GATK} -T RealignerTargetCreator -U ALLOW_N_CIGAR_READS -R ${hg19}/hg19.fa -I ${workdir}/04-picard/${sample}.marked.bam -o ${workdir}/05-GATK/${sample}.marked.intervals -known ${known1000G_indels} -known ${GoldStandard_indels}
 
 java  -jar ${GATK} -T IndelRealigner -R ${hg19}/hg19.fa -I ${workdir}/04-picard/${sample}.marked.bam -targetIntervals ${workdir}/05-GATK/${sample}.marked.intervals -o ${workdir}/05-GATK/${sample}.marked.realn.bam -known $known1000G_indels -known $GoldStandard_indels 
 
-java -jar ${GATK} -nct 2 -T BaseRecalibrator -R ${hg19}/hg19.fa -I ${workdir}/05-GATK/${sample}.marked.realn.bam -o ${workdir}/05-GATK/${sample}.marked.realn.recal -knownSites ${known1000G_indels} -knownSites ${GoldStandard_indels} -knownSites ${dbSNP}
+java -jar ${GATK} -T BaseRecalibrator -R ${hg19}/hg19.fa -I ${workdir}/05-GATK/${sample}.marked.realn.bam -o ${workdir}/05-GATK/${sample}.marked.realn.recal -knownSites ${known1000G_indels} -knownSites ${GoldStandard_indels} -knownSites ${dbSNP}
 
 java -jar ${GATK}  -T PrintReads -R ${hg19}/hg19.fa -I ${workdir}/05-GATK/${sample}.marked.realn.bam -o ${workdir}/05-GATK/${sample}.marked.realn.recal.bam --BQSR ${workdir}/05-GATK/${sample}.marked.realn.recal
 
 java -jar ${GATK} -T HaplotypeCaller -R ${hg19}/hg19.fa -L ${IntervalList} --dbsnp ${dbSNP} --emitRefConfidence GVCF -I ${workdir}/05-GATK/${sample}.marked.realn.recal.bam  -o ${workdir}/06-germline/${sample}.marked.realn.recal.bam.g.vcf
 
 java -jar ${PICARD} CollectHsMetrics I=${workdir}/05-GATK/${sample}.marked.realn.bam O=${workdir}/07-HsMetrics/${sample}.marked.realn.recal.bam.metrics R=${hg19}/hg19.fa BAIT_INTERVALS=${IntervalList} TARGET_INTERVALS=${IntervalList}
+
+#https://broadinstitute.github.io/picard/picard-metric-definitions.html#HsMetrics
